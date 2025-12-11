@@ -1,0 +1,9 @@
+Flask==2.3.3
+Flask-Login==0.6.2
+Werkzeug==2.3.7
+PyMySQL==1.1.0
+python-dotenv==1.0.0
+reportlab==4.0.4
+sshtunnel==0.4.0
+paramiko==3.3.1  # Añade esta línea
+cryptography==41.0.7  # Añade esta línea

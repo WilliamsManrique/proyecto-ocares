@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Perfil - Agrícola Green Crop</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/3.jpg') }}">
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/perfil.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/output.css') }}" rel="stylesheet">
+</head>
+<body class="main-body">
+
+    <header class="main-header">
+        <div class="header-container">
+            <a href="{{ url_for('index') }}" class="header-logo-link">
+                <img src="{{ url_for('static', filename='img/3.jpg') }}" alt="Logo Agrícola Green Crop" class="logo-img">
+                <div class="logo-text-container">
+                    <h1 class="logo-title">
+                        <span class="logo-text-agricola">Agrícola</span>
+                        <span class="logo-text-green">Green</span>
+                    </h1>
+                    <p class="logo-text-crop">Crop</p>
+                </div>
+            </a>
+
+            <nav id="mobile-menu" class="mobile-menu">
+                <a href="{{ url_for('index') }}" class="nav-link">Inicio</a>
+
+                <!-- Menú desplegable de productos -->
+                <div class="dropdown">
+                    <a href="{{ url_for('productos') }}" class="nav-link dropdown-toggle">
+                        Productos <span class="dropdown-arrow">▼</span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="{{ url_for('productos') }}#fertilizantes" class="dropdown-link">Fertilizantes Nitrogenados</a>
+                        <a href="{{ url_for('productos') }}#pesticidas" class="dropdown-link">Fertilizantes Fosfatados</a>
+                        <a href="{{ url_for('productos') }}#semillas" class="dropdown-link">Fertilizantes Potásicos</a>
+                        <a href="{{ url_for('productos') }}#herramientas" class="dropdown-link">Fertilizantes Magnésicos</a>
+                        <a href="{{ url_for('productos') }}#herramientas" class="dropdown-link">Micronutrientes</a>
+                        <a href="{{ url_for('productos') }}#herramientas" class="dropdown-link">Fertilizantes Compuestos</a>
+                        <a href="{{ url_for('productos') }}#herramientas" class="dropdown-link">Fertilizantes Hidrosolubles</a>
+                        <a href="{{ url_for('productos') }}#herramientas" class="dropdown-link">Fertilizantes Foliares</a>
+                    </div>
+                </div>
+
+                <a href="{{ url_for('servicio') }}" class="nav-link">Servicios</a>
+                <a href="{{ url_for('blog') }}" class="nav-link">Blog</a>
+                <a href="{{ url_for('nosotros') }}" class="nav-link">Nosotros</a>
+                <a href="{{ url_for('contact') }}" class="nav-link">Contacto</a>
+                <a href="{{ url_for('formulario_compra') }}" class="nav-link">Compra</a>
+                
+                <!-- Navegación de Usuario -->
+                <div class="user-nav">
+                    {% if current_user.is_authenticated %}
+                        <a href="{{ url_for('perfil') }}" class="nav-link user-link">👤 Mi Perfil</a>
+                        <a href="{{ url_for('logout') }}" class="nav-link logout-link">🚪 Cerrar Sesión</a>
+                    {% else %}
+                        <a href="{{ url_for('login') }}" class="nav-link login-link">🔑 Iniciar Sesión</a>
+                        <a href="{{ url_for('registro') }}" class="nav-link register-link">📝 Registrarse</a>
+                    {% endif %}
+                </div>
+            </nav>
+
+            <button id="mobile-menu-button" class="mobile-menu-btn">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <section class="page-title-section">
+            <h1 class="page-title">Mi Perfil</h1>
+            <p class="page-subtitle">Gestiona tu información personal, direcciones y preferencias</p>
+        </section>
+
+        <section class="profile-section">
+            <div class="container profile-container">
+                <div class="profile-sections">
+                    <!-- Información básica -->
+                    <div class="profile-section-card">
+                        <h3 class="form-title">Información Personal</h3>
+                        <div class="info-card">
+                            <p><strong>Email:</strong> {{ current_user.email }}</p>
+                            <p><strong>Teléfono:</strong> {{ current_user.telefono }}</p>
+                            <p><strong>Puntos:</strong> {{ current_user.puntos }}</p>
+                        </div>
+                    </div>
+
+                    <!-- Direcciones -->
+                    <div class="profile-section-card">
+                        <h3 class="form-title">Direcciones Guardadas</h3>
+                        {% for direccion in user_data.direcciones %}
+                        <div class="address-card">
+                            <p><strong>{{ direccion.alias }}</strong></p>
+                            <p>{{ direccion.calle }}, {{ direccion.ciudad }}, {{ direccion.pais }}</p>
+                            {% if direccion.es_principal %}<span class="badge">Principal</span>{% endif %}
+                        </div>
+                        {% endfor %}
+                        
+                        <button class="btn-toggle-form btn-primary">Agregar Dirección</button>
+                        <form method="POST" action="{{ url_for('agregar_direccion') }}" class="address-form hidden">
+                            <div class="form-group">
+                                <input type="text" name="alias" placeholder="Alias (Casa, Trabajo)" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="calle" placeholder="Calle y número" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="ciudad" placeholder="Ciudad" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="estado" placeholder="Estado/Región">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="codigo_postal" placeholder="Código Postal">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="pais" placeholder="País" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="es_principal">
+                                    Establecer como dirección principal
+                                </label>
+                            </div>
+                            <button type="submit" class="btn-primary">Guardar Dirección</button>
+                        </form>
+                    </div>
+
+                    <!-- Historial de Compras -->
+                    <div class="profile-section-card">
+                        <h3 class="form-title">Historial de Compras</h3>
+                        {% for pedido in user_data.pedidos %}
+                        <div class="order-card">
+                            <div class="order-header">
+                                <span><strong>Pedido #{{ pedido.id }}</strong></span>
+                                <span>S/ {{ "%.2f"|format(pedido.total) }}</span>
+                            </div>
+                            <p>Fecha: {{ pedido.fecha_pedido.strftime('%d/%m/%Y %H:%M') }}</p>
+                            <p>Estado: {{ pedido.estado }}</p>
+                            <a href="{{ url_for('descargar_factura', pedido_id=pedido.id) }}" class="btn-download">Descargar Factura PDF</a>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    <!-- Lista de Deseos -->
+                    <div class="profile-section-card">
+                        <h3 class="form-title">Mi Lista de Deseos</h3>
+                        <div class="wishlist-items">
+                            {% for item in user_data.lista_deseos %}
+                            <div class="wishlist-item">
+                                <span>Producto #{{ item.producto_id }}</span>
+                                <form method="POST" action="{{ url_for('eliminar_favorito', item_id=item.id) }}" style="display: inline;">
+                                    <button type="submit" class="btn-remove">Eliminar</button>
+                                </form>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <!-- Preferencias de Notificación -->
+                    <div class="profile-section-card">
+                        <h3 class="form-title">Preferencias de Notificación</h3>
+                        <form method="POST" action="{{ url_for('actualizar_preferencias') }}">
+                            <div class="form-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="email_notificaciones" {% if user_data.preferencias.email_notificaciones %}checked{% endif %}>
+                                    Notificaciones por Email
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="sms_notificaciones" {% if user_data.preferencias.sms_notificaciones %}checked{% endif %}>
+                                    Notificaciones por SMS
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="emails_promocionales" {% if user_data.preferencias.emails_promocionales %}checked{% endif %}>
+                                    Emails Promocionales
+                                </label>
+                            </div>
+                            <button type="submit" class="btn-primary">Guardar Preferencias</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="main-footer">
+        <div class="footer-overlay"></div>
+        <div class="footer-container">
+            <div class="footer-section footer-contact">
+                <h3 class="footer-title">Contáctanos</h3>
+                <p><i class="fas fa-phone footer-icon"></i> +51 941 562 220</p>
+                <p><i class="fas fa-map-marker-alt footer-icon"></i> Jr. Sucre 426 Imperial, Cañete, Perú</p>
+                <p><i class="fas fa-envelope footer-icon"></i> agricolagreencrop23@gmail.com</p>
+                <a href="{{ url_for('contact') }}" class="contact-link">Ir a Contacto</a>
+            </div>
+            
+            <div class="footer-section">
+                <h3 class="footer-title">Nosotros</h3>
+                <ul class="footer-links">
+                    <li><a href="{{ url_for('nosotros') }}">Galería</a></li>
+                    <li><a href="{{ url_for('nosotros') }}">Historia</a></li>
+                    <li><a href="{{ url_for('nosotros') }}">Políticas de Calidad</a></li>
+                    <li><a href="{{ url_for('nosotros') }}">Política de Sostenibilidad</a></li>
+                    <li><a href="{{ url_for('nosotros') }}" class="main-link">Conoce más sobre nosotros</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3 class="footer-title">Productos</h3>
+                <ul class="footer-links">
+                    <li><a href="{{ url_for('productos') }}">Fertilizantes Genéricos</a></li>
+                    <li><a href="{{ url_for('productos') }}">Micronutrientes</a></li>
+                    <li><a href="{{ url_for('productos') }}">Fertilizantes Compuestos</a></li>
+                    <li><a href="{{ url_for('productos') }}">Fertilizantes Hidrosolubles</a></li>
+                    <li><a href="{{ url_for('productos') }}">Fertilizantes Foliares</a></li>
+                    <li><a href="{{ url_for('productos') }}" class="main-link">Ver todos los productos</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section footer-social">
+                <h3 class="footer-title">Síguenos</h3>
+                <div class="social-links">
+                    <a href="https://tiktok.com" target="_blank" aria-label="TikTok" class="tiktok">
+                        <img src="{{ url_for('static', filename='icon/tiktok.png') }}" alt="TikTok">
+                    </a>
+                    <a href="https://www.instagram.com/" target="_blank" aria-label="Instagram" class="instagram">
+                        <img src="{{ url_for('static', filename='icon/instagram.png') }}" alt="Instagram">
+                    </a>
+                    <a href="https://www.youtube.com/" target="_blank" aria-label="YouTube" class="youtube">
+                        <img src="{{ url_for('static', filename='icon/youtube.png') }}" alt="YouTube">
+                    </a>
+                    <a href="https://wa.me/51941562220" target="_blank" aria-label="WhatsApp" class="whatsapp">
+                        <img src="{{ url_for('static', filename='icon/whatsapp.png') }}" alt="WhatsApp">
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>© 2025 Agrícola Green Crop S.A.C. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- JS -->
+    <script src="{{ url_for('static', filename='js/web.js') }}"></script>
+    
+</html>

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Compra - Agrícola Green Crop</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/3.jpg') }}">
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/compra.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/output.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/animaciones.css') }}" rel="stylesheet">
+</head>
+<body class="main-body">
+
+    <header class="main-header">
+        <div class="header-container">
+            <a href="{{ url_for('index') }}" class="header-logo-link">
+                <img src="{{ url_for('static', filename='img/3.jpg') }}" alt="Logo Agrícola Green Crop" class="logo-img">
+                <div class="logo-text-container">
+                    <h1 class="logo-title">
+                        <span class="logo-text-agricola">Agrícola</span>
+                        <span class="logo-text-green">Green</span>
+                    </h1>
+                    <p class="logo-text-crop">Crop</p>
+                </div>
+            </a>
+
+            <nav id="mobile-menu" class="mobile-menu">
+                <a href="{{ url_for('index') }}" class="nav-link">Inicio</a>
+
+                <!-- Menú desplegable de productos -->
+                <div class="dropdown">
+                    <a href="{{ url_for('productos') }}" class="nav-link dropdown-toggle">
+                        Productos <span class="dropdown-arrow">▼</span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="{{ url_for('productos') }}#fertilizantes" class="dropdown-link">Fertilizantes Nitrogenados</a>
+                        <a href="{{ url_for('productos') }}#pesticidas" class="dropdown-link">Fertilizantes Fosfatados</a>
+                        <a href="{{ url_for('productos') }}#semillas" class="dropdown-link">Fertilizantes Potásicos</a>
+                        <a href="{{ url_for('productos') }}#herramientas" class="dropdown-link">Fertilizantes Magnésicos</a>
+                        <a href="{{ url_for('productos') }}#herramientas" class="dropdown-link">Micronutrientes</a>
+                        <a href="{{ url_for('productos') }}#herramientas" class="dropdown-link">Fertilizantes Compuestos</a>
+                        <a href="{{ url_for('productos') }}#herramientas" class="dropdown-link">Fertilizantes Hidrosolubles</a>
+                        <a href="{{ url_for('productos') }}#herramientas" class="dropdown-link">Fertilizantes Foliares</a>
+                    </div>
+                </div>
+
+                <a href="{{ url_for('servicio') }}" class="nav-link">Servicios</a>
+                <a href="{{ url_for('blog') }}" class="nav-link">Blog</a>
+                <a href="{{ url_for('nosotros') }}" class="nav-link">Nosotros</a>
+                <a href="{{ url_for('contact') }}" class="nav-link">Contacto</a>
+                <a href="{{ url_for('formulario_compra') }}" class="nav-link">Compra</a>
+            </nav>
+
+            <button id="mobile-menu-button" class="mobile-menu-btn">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <section class="page-title-section fade-in">
+            <h1 class="page-title">Formulario de Compra</h1>
+            <p class="page-subtitle">Completa tus datos y selecciona el método de pago para finalizar tu pedido.</p>
+        </section>
+
+        <section class="form-section">
+            <div class="container form-container">
+                <!-- Layout de dos columnas -->
+                <div class="checkout-layout">
+                    <!-- Columna del formulario -->
+                    <div class="checkout-form-column">
+                        <form id="purchase-form" class="purchase-form" method="POST" action="{{ url_for('formulario_compra') }}">
+    
+    <!-- Campos ocultos para enviar datos del carrito -->
+    <input type="hidden" id="cart-data" name="cart-data">
+    <input type="hidden" id="total-amount" name="total">
+    
+    <!-- DATOS DEL CLIENTE - CON FLOAT LABEL -->
+<h2 class="form-title form-element">Datos del Cliente</h2>
+
+<div class="field-float form-element">
+    <input type="text" id="full-name" name="full-name" placeholder=" " required>
+    <label for="full-name">Nombre completo</label>
+</div>
+
+<div class="field-float form-element">
+    <input type="email" id="email" name="email" placeholder=" " required>
+    <label for="email">Correo electrónico</label>
+</div>
+
+<div class="field-float form-element">
+    <input type="tel" id="phone" name="phone" placeholder=" " required>
+    <label for="phone">Teléfono / WhatsApp</label>
+</div>
+
+<div class="field-float form-element">
+    <input type="text" id="address" name="address" placeholder=" " required>
+    <label for="address">Dirección de envío</label>
+</div>
+    <!-- MÉTODO DE PAGO -->
+    <h2 class="form-title">Método de Pago</h2>
+    <div class="payment-options">
+        <label class="payment-method">
+            <input type="radio" name="payment-method" value="tarjeta" required>
+            💳 Tarjeta de crédito / débito
+        </label>
+        <label class="payment-method">
+            <input type="radio" name="payment-method" value="transferencia">
+            🏦 Transferencia bancaria
+        </label>
+        <label class="payment-method">
+            <input type="radio" name="payment-method" value="yape">
+            📱 Yape / Plin
+        </label>
+    </div>
+
+    <button type="submit" class="btn-primary">Finalizar Compra</button>
+</form>
+                    </div>
+
+                    <!-- Columna del carrito -->
+                    <div class="checkout-cart-column">
+                        <div class="order-summary-card">
+                            <h2 class="form-title">Resumen de tu Pedido</h2>
+                            
+                            <!-- Tabla de productos del carrito -->
+                            <div class="cart-table-container">
+                                <table class="cart-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Producto</th>
+                                            <th>Precio</th>
+                                            <th>Cantidad</th>
+                                            <th>Subtotal</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="checkout-cart-items">
+                                        <!-- Los productos se cargarán dinámicamente -->
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="3" style="text-align: right;"><strong>Total:</strong></td>
+                                            <td colspan="2" id="checkout-cart-total">$0.00</td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+
+                            <div class="cart-actions">
+                                <a href="{{ url_for('compra_productos') }}" class="btn btn-secondary">Seguir Comprando</a> 
+                                <button class="btn-primary" onclick="updateCartFromTable()">Actualizar Carrito</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+<footer class="main-footer">
+    <div class="footer-overlay"></div>
+    <div class="footer-container">
+        <div class="footer-section footer-contact">
+            <h3 class="footer-title">Contáctanos</h3>
+            <p><i class="fas fa-phone footer-icon"></i> +51 941 562 220</p>
+            <p><i class="fas fa-map-marker-alt footer-icon"></i> Jr. Sucre 426 Imperial, Cañete, Perú</p>
+            <p><i class="fas fa-envelope footer-icon"></i> agricolagreencrop23@gmail.com</p>
+            <!-- Agregar enlace a la página de contacto -->
+            <a href="{{ url_for('contact') }}" class="contact-link">Ir a Contacto</a>
+        </div>
+        
+        <div class="footer-section">
+            <h3 class="footer-title">Nosotros</h3>
+            <ul class="footer-links">
+                <li><a href="{{ url_for('nosotros') }}">Galería</a></li>
+                <li><a href="{{ url_for('nosotros') }}">Historia</a></li>
+                <li><a href="{{ url_for('nosotros') }}">Políticas de Calidad</a></li>
+                <li><a href="{{ url_for('nosotros') }}">Política de Sostenibilidad</a></li>
+                <!-- Enlace principal a la página Nosotros -->
+                <li><a href="{{ url_for('nosotros') }}" class="main-link">Conoce más sobre nosotros</a></li>
+            </ul>
+        </div>
+        
+        <div class="footer-section">
+            <h3 class="footer-title">Productos</h3>
+            <ul class="footer-links">
+                <li><a href="{{ url_for('productos') }}">Fertilizantes Genéricos</a></li>
+                <li><a href="{{ url_for('productos') }}">Micronutrientes</a></li>
+                <li><a href="{{ url_for('productos') }}">Fertilizantes Compuestos</a></li>
+                <li><a href="{{ url_for('productos') }}">Fertilizantes Hidrosolubles</a></li>
+                <li><a href="{{ url_for('productos') }}">Fertilizantes Foliares</a></li>
+                <!-- Enlace principal a la página Productos -->
+                <li><a href="{{ url_for('productos') }}" class="main-link">Ver todos los productos</a></li>
+            </ul>
+        </div>
+        
+        <div class="footer-section footer-social">
+            <h3 class="footer-title">Síguenos</h3>
+            <div class="social-links">
+                <a href="https://tiktok.com" target="_blank" aria-label="TikTok" class="tiktok">
+                    <img src="{{ url_for('static', filename='icon/tiktok.png') }}" alt="TikTok">
+                </a>
+                <a href="https://www.instagram.com/" target="_blank" aria-label="Instagram" class="instagram">
+                    <img src="{{ url_for('static', filename='icon/instagram.png') }}" alt="Instagram">
+                </a>
+                <a href="https://www.youtube.com/" target="_blank" aria-label="YouTube" class="youtube">
+                    <img src="{{ url_for('static', filename='icon/youtube.png') }}" alt="YouTube">
+                </a>
+                <a href="https://wa.me/51941562220" target="_blank" aria-label="WhatsApp" class="whatsapp">
+                    <img src="{{ url_for('static', filename='icon/whatsapp.png') }}" alt="WhatsApp">
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer-bottom">
+        <p>© 2025 Agrícola Green Crop S.A.C. Todos los derechos reservados.</p>
+    </div>
+</footer>
+
+
+    <!-- JS general -->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <!-- JS específico del formulario -->
+    <script src="{{ url_for('static', filename='js/compra.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - Agrícola Green Crop</title>
+    <link href="{{ url_for('static', filename='css/registro.css') }}" rel="stylesheet">
+    
+</head>
+
+<body>
+    <div class="container">
+        <h2 class="title">Crear Cuenta</h2>
+
+        <!-- Mensajes flash -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="messages-container">
+                    {% for category, message in messages %}
+                        <div class="message {{ category }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <form method="POST" class="form">
+            <div class="form-group">
+                <label for="email" class="label">Correo:</label>
+                <input type="email" id="email" name="email" required placeholder="tucorreo@ejemplo.com"
+                       class="input">
+            </div>
+
+            <div class="form-group">
+                <label for="telefono" class="label">Teléfono:</label>
+                <input type="text" id="telefono" name="telefono" required placeholder="999-999-999"
+                       class="input">
+            </div>
+            <div class="form-group">
+    <label>Tus intereses principales (opcional):</label>
+    <div class="checkbox-group">
+        <label>
+            <input type="checkbox" name="intereses" value="fertilizantes">
+            🌱 Fertilizantes y Nutrientes
+        </label>
+        <label>
+            <input type="checkbox" name="intereses" value="asesoramiento">
+            🔧 Asesoramiento Técnico
+        </label>
+        <label>
+            <input type="checkbox" name="intereses" value="precios">
+            💰 Precios y Ofertas
+        </label>
+        <label>
+            <input type="checkbox" name="intereses" value="novedades">
+            📢 Novedades del Sector
+        </label>
+    </div>
+</div>
+
+            <div class="form-group">
+                <label for="password" class="label">Contraseña:</label>
+                <input type="password" id="password" name="password" required placeholder="********"
+                       class="input">
+            </div>
+
+            <div class="form-group">
+                <label for="confirm_password" class="label">Confirmar Contraseña:</label>
+                <input type="password" id="confirm_password" name="confirm_password" required placeholder="********"
+                       class="input">
+            </div>
+
+            <button type="submit" class="submit-btn">
+                Registrar
+            </button>
+        </form>
+
+        <p class="login-text">
+            ¿Ya tienes cuenta?
+            <a href="/login" class="login-link">Inicia sesión</a>
+        </p>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/registro.js') }}"></script>
+</body>
+</html>

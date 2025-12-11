@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio - Agrícola Green Crop</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/3.jpg') }}">
+
+    <!-- Estilos principales -->
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/output.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/tarjeta.css') }}" rel="stylesheet">
+    <!-- 💬 Estilo del chatbot -->
+    <link href="{{ url_for('static', filename='css/chatbot.css') }}" rel="stylesheet">
+</head>
+
+<body class="main-body">
+
+    <!-- ================= HEADER ================= -->
+    <header class="main-header">
+        <div class="header-container">
+            <a href="{{ url_for('index') }}" class="header-logo-link">
+                <img src="{{ url_for('static', filename='img/3.jpg') }}" alt="Logo Agrícola Green Crop"
+                    class="logo-img">
+                <div class="logo-text-container">
+                    <h1 class="logo-title">
+                        <span class="logo-text-agricola">Agrícola</span>
+                        <span class="logo-text-green">Green</span>
+                    </h1>
+                    <p class="logo-text-crop">Crop</p>
+                </div>
+            </a>
+
+            <nav id="mobile-menu" class="mobile-menu">
+                <a href="{{ url_for('index') }}" class="nav-link">Inicio</a>
+
+                <div class="dropdown">
+                    <a href="{{ url_for('productos') }}" class="nav-link dropdown-toggle">
+                        Productos <span class="dropdown-arrow">▼</span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="{{ url_for('productos') }}#fertilizantes" class="dropdown-link">Fertilizantes
+                            Nitrogenados</a>
+                        <a href="{{ url_for('productos') }}#pesticidas" class="dropdown-link">Fertilizantes
+                            Fosfatados</a>
+                        <a href="{{ url_for('productos') }}#semillas" class="dropdown-link">Fertilizantes Potásicos</a>
+                        <a href="{{ url_for('productos') }}#herramientas" class="dropdown-link">Fertilizantes
+                            Magnésicos</a>
+                        <a href="{{ url_for('productos') }}#herramientas" class="dropdown-link">Micronutrientes</a>
+                        <a href="{{ url_for('productos') }}#herramientas" class="dropdown-link">Fertilizantes
+                            Compuestos</a>
+                        <a href="{{ url_for('productos') }}#herramientas" class="dropdown-link">Fertilizantes
+                            Hidrosolubles</a>
+                        <a href="{{ url_for('productos') }}#herramientas" class="dropdown-link">Fertilizantes
+                            Foliares</a>
+                    </div>
+                </div>
+
+                <a href="{{ url_for('servicio') }}" class="nav-link">Servicios</a>
+                <a href="{{ url_for('blog') }}" class="nav-link">Blog</a>
+                <a href="{{ url_for('nosotros') }}" class="nav-link">Nosotros</a>
+                <a href="{{ url_for('contact') }}" class="nav-link">Contacto</a>
+
+
+                <!-- Navegación de Usuario -->
+                <div class="user-nav">
+                    {% if current_user.is_authenticated %}
+                    <a href="{{ url_for('perfil') }}" class="nav-link user-link">👤 Mi Perfil</a>
+                    <a href="{{ url_for('logout') }}" class="nav-link logout-link">🚪 Cerrar Sesión</a>
+                    {% else %}
+                    <a href="{{ url_for('login') }}" class="nav-link registro-link">📝 Iniciar Sesion</a>
+                    <a href="{{ url_for('registro') }}" class="nav-link registro-link">📝 Registrarse</a>
+                    {% endif %}
+                </div>
+            </nav>
+
+            <button id="mobile-menu-button" class="mobile-menu-btn">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                    d="M4 6h16M4 12h16m-7 6h7">
+                    </path>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+  
+
+
+    <!-- ================= MAIN ================= -->
+    <main class="main-content">
+        <!-- Sección de slider -->
+        <section class="slider-section">
+            <div id="slider" class="slider-inner">
+                <div class="slide">
+                    <img src="{{ url_for('static', filename='img/Foto_Agricultura.jpg') }}" class="slide-image"
+                        alt="Imagen 1">
+                    <div class="slide-overlay">
+                        <div class="slide-text-container">
+                            <h2 class="slide-title">Soluciones Agrícolas para un Futuro Sostenible</h2>
+                            <p class="slide-description">Tecnología y experiencia a tu servicio para maximizar tu
+                                cosecha.</p>
+                            <a href="{{ url_for('contact') }}" class="btn-primary">Contáctanos</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide">
+                    <img src="{{ url_for('static', filename='img/pngtree-corn.jpg') }}" class="slide-image"
+                        alt="Imagen 2">
+                    <div class="slide-overlay">
+                        <div class="slide-text-container">
+                            <h2 class="slide-title">Innovación que Nutre la Tierra</h2>
+                            <p class="slide-description">Descubre nuestros productos de última generación para una
+                                agricultura eficiente.</p>
+                            <a href="{{ url_for('productos') }}" class="btn-primary">Ver Productos</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button id="prevBtn" class="slider-btn prev-btn">⬅</button>
+            <button id="nextBtn" class="slider-btn next-btn">➡</button>
+            <div class="slider-indicators">
+                <button class="indicator active" data-index="0"></button>
+                <button class="indicator" data-index="1"></button>
+            </div>
+        </section>
+
+        <!-- Sección Sobre Nosotros -->
+        <section id="nosotros" class="about-us-section">
+            <div class="container about-us-container">
+                <div class="about-us-image-container">
+                    <img src="{{ url_for('static', filename='img/images.jpeg') }}" alt="Equipo Agrícola Green Crop"
+                        class="about-us-image">
+                </div>
+                <div class="about-us-content">
+                    <h2 class="section-title">Sobre Nosotros</h2>
+                    <p class="section-text">
+                        Somos una empresa con más de 10 años de experiencia en el sector agrícola. Nuestra misión es
+                        ofrecer productos y servicios de calidad que impulsen el crecimiento del agricultor peruano.
+                    </p>
+                    <ul class="about-us-list">
+                        <li><i class="fas fa-check-circle icon-list"></i> Productos certificados</li>
+                        <li><i class="fas fa-check-circle icon-list"></i> Asesoramiento personalizado</li>
+                        <li><i class="fas fa-check-circle icon-list"></i> Precios competitivos</li>
+                        <li><i class="fas fa-check-circle icon-list"></i> Entrega puntual</li>
+                    </ul>
+                    <a href="{{ url_for('nosotros') }}" class="btn-secondary">Conoce más</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección ¿Por qué elegirnos? -->
+        <section class="why-us-section">
+            <div class="container">
+                <h2 class="section-title">¿Por qué elegirnos?</h2>
+                <p class="section-text">
+                    Nuestros valores fundamentales nos diferencian. La innovación, la calidad y un servicio excepcional
+                    son la base de todo lo que hacemos.
+                </p>
+                <div class="features-grid">
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <i class="fas fa-lightbulb feature-icon"></i>
+                                <h3 class="feature-title">Innovación</h3>
+                            </div>
+                            <div class="flip-card-back">
+                                <p class="feature-text">
+                                    Damos respuesta a las necesidades de hoy, mientras anticipamos los desafíos del
+                                    mañana.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <i class="fas fa-seedling feature-icon"></i>
+                                <h3 class="feature-title">Calidad</h3>
+                            </div>
+                            <div class="flip-card-back">
+                                <p class="feature-text">
+                                    Trabajamos con materias primas y procesos de alta calidad para garantizar la
+                                    efectividad de nuestros productos.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <i class="fas fa-handshake feature-icon"></i>
+                                <h3 class="feature-title">Servicio</h3>
+                            </div>
+                            <div class="flip-card-back">
+                                <p class="feature-text">
+                                    Nuestra prioridad es el éxito de nuestros clientes, porque cuando los agricultores
+                                    prosperan, nuestro mundo prospera.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= FOOTER ================= -->
+        <footer class="main-footer">
+    <div class="footer-overlay"></div>
+    <div class="footer-container">
+        <div class="footer-section footer-contact">
+            <h3 class="footer-title">Contáctanos</h3>
+            <p><i class="fas fa-phone footer-icon"></i> +51 941 562 220</p>
+            <p><i class="fas fa-map-marker-alt footer-icon"></i> Jr. Sucre 426 Imperial, Cañete, Perú</p>
+            <p><i class="fas fa-envelope footer-icon"></i> agricolagreencrop23@gmail.com</p>
+            <!-- Agregar enlace a la página de contacto -->
+            <a href="{{ url_for('contact') }}" class="contact-link">Ir a Contacto</a>
+        </div>
+        
+        <div class="footer-section">
+            <h3 class="footer-title">Nosotros</h3>
+            <ul class="footer-links">
+                <li><a href="{{ url_for('nosotros') }}">Galería</a></li>
+                <li><a href="{{ url_for('nosotros') }}">Historia</a></li>
+                <li><a href="{{ url_for('nosotros') }}">Políticas de Calidad</a></li>
+                <li><a href="{{ url_for('nosotros') }}">Política de Sostenibilidad</a></li>
+                <!-- Enlace principal a la página Nosotros -->
+                <li><a href="{{ url_for('nosotros') }}" class="main-link">Conoce más sobre nosotros</a></li>
+            </ul>
+        </div>
+        
+        <div class="footer-section">
+            <h3 class="footer-title">Productos</h3>
+            <ul class="footer-links">
+                <li><a href="{{ url_for('productos') }}">Fertilizantes Genéricos</a></li>
+                <li><a href="{{ url_for('productos') }}">Micronutrientes</a></li>
+                <li><a href="{{ url_for('productos') }}">Fertilizantes Compuestos</a></li>
+                <li><a href="{{ url_for('productos') }}">Fertilizantes Hidrosolubles</a></li>
+                <li><a href="{{ url_for('productos') }}">Fertilizantes Foliares</a></li>
+                <!-- Enlace principal a la página Productos -->
+                <li><a href="{{ url_for('productos') }}" class="main-link">Ver todos los productos</a></li>
+            </ul>
+        </div>
+        
+        <div class="footer-section footer-social">
+            <h3 class="footer-title">Síguenos</h3>
+            <div class="social-links">
+                <a href="https://tiktok.com" target="_blank" aria-label="TikTok" class="tiktok">
+                    <img src="{{ url_for('static', filename='icon/tiktok.png') }}" alt="TikTok">
+                </a>
+                <a href="https://www.instagram.com/" target="_blank" aria-label="Instagram" class="instagram">
+                    <img src="{{ url_for('static', filename='icon/instagram.png') }}" alt="Instagram">
+                </a>
+                <a href="https://www.youtube.com/" target="_blank" aria-label="YouTube" class="youtube">
+                    <img src="{{ url_for('static', filename='icon/youtube.png') }}" alt="YouTube">
+                </a>
+                <a href="https://wa.me/51941562220" target="_blank" aria-label="WhatsApp" class="whatsapp">
+                    <img src="{{ url_for('static', filename='icon/whatsapp.png') }}" alt="WhatsApp">
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer-bottom">
+        <p>© 2025 Agrícola Green Crop S.A.C. Todos los derechos reservados.</p>
+    </div>
+</footer>
+
+        <!-- 💬 Chatbot flotante -->
+        {% include 'chatbot.html' %}
+
+        <!-- Scripts -->
+        <script src="{{ url_for('static', filename='js/web.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/chatbot.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+
+</html>

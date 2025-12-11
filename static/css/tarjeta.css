@@ -1,0 +1,198 @@
+/* tarjeta.css - Estilos para la sección "Por qué elegirnos" con tarjetas animadas */
+
+/* ------------------------------------------------------------------ */
+/* A. ESTILOS DEL CONTENEDOR (Sección Principal) */
+/* ------------------------------------------------------------------ */
+.why-us-section {
+    padding: 80px 0;
+    /* FONDO DE LA SECCIÓN: DDF6D2 (Verde Menta Suave) */
+    background: linear-gradient(135deg, #ffffff 0%, #ffffff 100%);
+}
+
+.why-us-section .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.why-us-section .section-title {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    /* COLOR DE LETRAS: 328E6E (Verde Esmeralda Oscuro, para contraste sobre el fondo claro) */
+    color: #328E6E;
+    display: block;
+    width: 100%;
+    text-align: center;
+    position: relative;
+}
+
+.why-us-section .section-title:after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    /* Acento en el mismo color de las letras para coherencia */
+    background: #328E6E;
+    border-radius: 2px;
+}
+
+.why-us-section .section-text {
+    font-size: 1.2rem;
+    max-width: 800px;
+    margin: 30px auto 60px;
+    /* COLOR DE LETRAS: 328E6E (Para contraste y legibilidad) */
+    color: #328E6E; 
+    text-align: center;
+}
+
+.why-us-section .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+    justify-items: center;
+}
+
+/* ------------------------------------------------------------------ */
+/* B. ESTILOS DE LAS TARJETAS (Flip-Card) */
+/* ------------------------------------------------------------------ */
+.why-us-section .flip-card {
+    background-color: transparent;
+    perspective: 1000px;
+    height: 320px;
+    width: 100%;
+    max-width: 350px;
+    border-radius: 15px;
+}
+
+.why-us-section .flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+}
+
+.why-us-section .flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.why-us-section .flip-card-front, 
+.why-us-section .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+}
+
+.why-us-section .flip-card-front {
+    /* FONDO DELANTERO: 84AE92 (Verde Grisáceo) */
+    background: linear-gradient(135deg, #84AE92 0%, #aff7c7 100%); /* Usamos un ligero degradado para profundidad */
+    /* Letras en Verde Esmeralda Oscuro para contraste sobre el verde grisáceo */
+    color: #328E6E;
+    /* Borde en el color de las letras para acento */
+    border: 3px solid #328E6E;
+}
+
+.why-us-section .flip-card-back {
+    /* FONDO TRASERO: B7E5B4 (Verde Claro) */
+    background: linear-gradient(135deg, #B7E5B4 0%, #a2cc9f 100%); /* Usamos un ligero degradado para profundidad */
+    /* Letras en Verde Esmeralda Oscuro para contraste sobre el fondo claro */
+    color: #328E6E;
+    transform: rotateY(180deg);
+    /* Borde en el color del frente para coordinación */
+    border: 3px solid #84AE92;
+}
+
+.why-us-section .feature-icon {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    /* Ícono en el lado frontal: Color de las letras */
+    color: #328E6E;
+}
+
+.why-us-section .flip-card-back .feature-icon {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    /* Ícono en el lado trasero: Color de las letras */
+    color: #328E6E;
+}
+
+.why-us-section .feature-title {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.why-us-section .feature-text {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    /* Texto en el color de las letras */
+    color: #328E6E;
+}
+
+/* ------------------------------------------------------------------ */
+/* C. ANIMACIÓN Y RESPONSIVE (Mantenidas) */
+/* ------------------------------------------------------------------ */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.why-us-section .flip-card {
+    animation: fadeInUp 0.6s ease forwards;
+    opacity: 0;
+}
+
+.why-us-section .flip-card:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.why-us-section .flip-card:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.why-us-section .flip-card:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .why-us-section .section-title {
+        font-size: 2rem;
+    }
+    
+    .why-us-section .section-text {
+        font-size: 1rem;
+    }
+    
+    .why-us-section .features-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .why-us-section .flip-card {
+        height: 280px; /* CORREGIDO: Se eliminó el carácter inválido */
+    } /* CORREGIDO: Se agregó el cierre correcto */
+}
+
+

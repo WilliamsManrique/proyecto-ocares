@@ -1,0 +1,288 @@
+/*
+ * Archivo CSS de Agrícola Green Crop - Optimizado
+ * Descripción: Estilos generales, tipografía, y estructura de la página de inicio.
+ * Organizado por secciones para una mejor legibilidad y mantenimiento.
+ */
+
+/* ====================================
+   - Estilos Generales y Utilidades -
+   ==================================== */
+
+:root {
+  --color-primary: #2e7d32; /* Verde agrícola oscuro */
+  --color-secondary: #48bb78; /* Verde claro */
+  --color-text-dark: #110f0f;
+  --color-text-light: #f8f5f5;
+  --color-background-light: #fff;
+  --color-background-dark: #2f855a;
+  --color-accent: #70c510; /* Verde brillante */
+  --color-border: #2c760a;
+  --font-serif: "Inria Serif", serif;
+  --font-sans: "Inter", sans-serif;
+  --font-title: "Jacques Francois", serif;
+}
+
+body {
+  width: 100%;
+  max-width: 1512px;
+  margin: 0 auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  font-family: var(--font-sans);
+  background-color: var(--color-background-light);
+  color: var(--color-text-dark);
+}
+
+.hidden {
+  display: none;
+}
+
+/* Contenedores y Layout */
+.frame-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.section-container {
+  width: 100%;
+  max-width: 1452px;
+  padding: 20px;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+  margin: 0 auto;
+}
+
+.text-container {
+  width: 100%;
+  max-width: 390px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.line {
+  width: 203px;
+  height: 1px;
+  background-color: var(--color-border);
+  margin: 0 auto;
+}
+
+/* Botones y enlaces */
+.btn {
+  padding: 12px 24px;
+  border-radius: 6px;
+  border: 1px solid var(--color-border);
+  text-decoration: none;
+  font-size: 24px;
+  text-align: center;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: var(--color-text-light);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-background-dark);
+}
+
+/* ====================================
+   - Encabezado y Navegación -
+   ==================================== */
+
+.header-custom {
+  background-color: var(--color-primary);
+  color: var(--color-text-light);
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+.header-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo-img {
+  width: 40px;
+  height: auto;
+  margin-right: 10px;
+}
+
+.logo-text {
+  font-family: var(--font-serif);
+  font-size: 24px;
+}
+
+.logo-text .green {
+  color: var(--color-accent);
+}
+
+.nav-links a {
+  color: var(--color-text-light);
+  font-size: 24px;
+  font-family: var(--font-sans);
+  margin-left: 20px;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: var(--color-accent);
+}
+
+/* ====================================
+   - Secciones principales -
+   ==================================== */
+
+.main-content {
+  padding: 40px 0;
+}
+
+/* Secciones con texto */
+.text-section {
+  padding: 20px;
+  text-align: center;
+}
+
+.section-title {
+  font-family: var(--font-title);
+  font-size: 40px;
+  color: var(--color-border);
+  margin-bottom: 20px;
+}
+
+.section-subtitle {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  color: var(--color-text-light);
+  margin-bottom: 20px;
+}
+
+.section-description {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  color: var(--color-text-dark);
+  line-height: 1.5;
+}
+
+/* ====================================
+   - Footer -
+   ==================================== */
+
+.footer {
+  background-color: var(--color-background-dark);
+  color: var(--color-text-light);
+  padding: 40px;
+  text-align: center;
+  box-shadow: 0 -4px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+.footer-links a {
+  color: var(--color-text-light);
+  font-size: 24px;
+  font-family: var(--font-sans);
+  text-decoration: none;
+  margin: 0 10px;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: var(--color-primary);
+}
+
+/* ====================================
+   - Animaciones y Efectos -
+   ==================================== */
+
+.why-choose-card {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.8s ease;
+}
+
+.why-choose-card.animated {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.why-choose-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.why-choose-icon {
+  transition: all 0.5s ease;
+  animation: pulseIcon 2s infinite;
+}
+
+.why-choose-card:hover .why-choose-icon {
+  transform: scale(1.2) rotate(5deg);
+  background: linear-gradient(135deg, var(--color-primary), #4caf50);
+  animation: none;
+}
+
+.why-choose-card:hover .why-choose-icon i {
+  color: white;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulseIcon {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+
+
+/* Estilos responsive para móviles del desplegable del producto */
+@media (max-width: 768px) {
+    .dropdown {
+        width: 100%;
+    }
+    
+    .dropdown-menu {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        box-shadow: none;
+        border: none;
+        background: transparent;
+        display: none;
+    }
+    
+    .dropdown-menu.active {
+        display: block;
+    }
+    
+    .dropdown-link {
+        padding: 10px 20px;
+        border-bottom: 1px solid #e5e7eb;
+    }
+    
+    .dropdown-toggle {
+        justify-content: space-between;
+    }
+}
+
+
+
+
+

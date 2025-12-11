@@ -1,0 +1,104 @@
+
+/* ===== ANIMACIONES PARA ENCABEZADOS servicios===== */
+
+/* Animación 1: Fade in con deslizamiento */
+.animate-fade-in-up {
+    opacity: 0;
+    transform: translateY(80px);
+    animation: fadeInUp 2.5s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+
+
+/* ==== Animación Fade-Up ==== */
+/* ==== Animación Fade-Up ==== */
+.fade-up {
+    opacity: 0;
+    transform: translateY(60px);
+    transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Animación de entrada para el título */
+.fade-in {
+    animation: fadeIn 1.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Efectos hover para iconos */
+.about-info:hover .custom-icon {
+    transform: scale(1.1) rotate(5deg);
+    background: #4CAF50;
+    color: white;
+}
+
+/* Animación para los valores */
+.values-list li {
+    transition: all 0.3s ease;
+}
+
+.values-list li:hover {
+    background: #f0f9f0;
+    transform: translateX(10px);
+}
+
+.values-list li:hover .value-icon {
+    transform: scale(1.2);
+}
+
+
+
+/* ========== SOLO 2 ANIMACIONES DOM ========== */
+
+/* 1. Animación de entrada escalonada - DOM Manipulation */
+.form-element {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease-out;
+}
+
+.form-element.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 2. Animación de validación en tiempo real - DOM Manipulation */
+@keyframes shakeInvalid {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+.input-invalid {
+    animation: shakeInvalid 0.4s ease-in-out;
+    border-color: #e74c3c !important;
+    background-color: #fee;
+}
+
+.input-valid {
+    border-color: #2ecc71 !important;
+    background-color: #f0fff4;
+    transition: all 0.3s ease;
+}

@@ -1,0 +1,568 @@
+:root {
+  --primary: #2e7d32;      /* Verde Principal */
+  --primary-light: #66bb6a;  /* Verde Claro */
+  --primary-dark: #1b5e20;   /* Verde Oscuro */
+  --accent: #a5d6a7;       /* Verde de Acento Sutil (Borde) */
+  --soft-green-bg: #f5fff5; /* 🌟 Nuevo: Fondo de caja verde muy pálido */
+  --background: #f9f9f9;
+  --text: #333;           
+  --shadow-color: #2e7d32; 
+}
+
+/* ===============================
+    RESETS Y BASE
+================================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* =================================
+    🔍 BUSCADOR MEJORADO - DISEÑO ELEGANTE
+================================= */
+
+/* 🌿 Fondo general de la sección del buscador */
+.search-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #ffffff 0%, #f8fff8 100%);
+    padding: 80px 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Efecto decorativo sutil */
+.search-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, var(--primary-light) 50%, transparent 100%);
+}
+
+/* Contenedor principal mejorado */
+.search-wrapper {
+    width: 100%;
+    max-width: 750px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+/* Título del buscador (opcional) */
+.search-title {
+    font-size: 1.5rem;
+    color: var(--primary-dark);
+    margin-bottom: 2rem;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+}
+
+/* 🌿 Caja principal del buscador - VERSIÓN MEJORADA */
+.search-container {
+    display: flex;
+    align-items: center;
+    background: var(--soft-green-bg);
+    border: 2px solid var(--primary-light);
+    border-radius: 16px;
+    padding: 8px 12px;
+    box-shadow: 
+        0 6px 20px rgba(46, 125, 50, 0.08),
+        0 2px 4px rgba(46, 125, 50, 0.04),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Efecto de brillo sutil en el borde */
+.search-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 14px;
+    padding: 2px;
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.8) 0%, 
+        rgba(102, 187, 106, 0.2) 50%, 
+        rgba(255, 255, 255, 0.8) 100%);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: subtract;
+    pointer-events: none;
+}
+
+/* Estados interactivos mejorados */
+.search-container:focus-within {
+    border-color: var(--primary);
+    box-shadow: 
+        0 12px 30px rgba(46, 125, 50, 0.15),
+        0 4px 8px rgba(46, 125, 50, 0.08);
+    transform: translateY(-2px);
+}
+
+.search-container:hover {
+    transform: translateY(-1px);
+    box-shadow: 
+        0 10px 25px rgba(46, 125, 50, 0.12),
+        0 3px 6px rgba(46, 125, 50, 0.06);
+}
+
+/* 🌱 Campo de texto mejorado */
+.search-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 1.15rem;
+    padding: 18px 20px 18px 20px;
+    color: var(--text);
+    font-weight: 500;
+    letter-spacing: -0.2px;
+}
+
+.search-input::placeholder {
+    color: #90a4ae;
+    font-weight: 400;
+    transition: all 0.3s ease;
+}
+
+.search-input:focus::placeholder {
+    color: #b0bec5;
+    transform: translateX(5px);
+}
+
+/* 🔍 Botón del buscador mejorado */
+.search-btn {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    border: none;
+    border-radius: 12px;
+    width: 56px;
+    height: 56px;
+    font-size: 22px;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 
+        0 4px 12px rgba(46, 125, 50, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Efecto de brillo en el botón */
+.search-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.2), 
+        transparent);
+    transition: left 0.6s;
+}
+
+.search-btn:hover {
+    background: linear-gradient(135deg, var(--primary-dark) 0%, #144017 100%);
+    transform: scale(1.08) translateY(-1px);
+    box-shadow: 
+        0 6px 18px rgba(46, 125, 50, 0.6),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.search-btn:hover::before {
+    left: 100%;
+}
+
+.search-btn:active {
+    transform: scale(0.98) translateY(0);
+    box-shadow: 
+        0 2px 8px rgba(46, 125, 50, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* 🌸 Lista de sugerencias mejorada */
+.suggestions-list {
+    list-style: none;
+    margin-top: 8px;
+    background: #ffffff;
+    border-radius: 0 0 16px 16px;
+    box-shadow: 
+        0 15px 35px rgba(0, 0, 0, 0.15),
+        0 5px 15px rgba(0, 0, 0, 0.08);
+    display: none;
+    max-height: 300px;
+    overflow-y: auto;
+    text-align: left;
+    border: 2px solid var(--primary-light);
+    border-top: none;
+    z-index: 10;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.suggestions-list li {
+    padding: 16px 20px;
+    border-bottom: 1px solid #f0f0f0;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 1rem;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.suggestions-list li:last-child {
+    border-bottom: none;
+}
+
+.suggestions-list li:hover {
+    background: var(--soft-green-bg);
+    padding-left: 24px;
+    color: var(--primary-dark);
+}
+
+.suggestions-list li::before {
+    content: '🔍';
+    font-size: 0.9rem;
+    opacity: 0.7;
+}
+
+/* Indicador de carga para búsquedas */
+.search-loading {
+    position: relative;
+}
+
+.search-loading::after {
+    content: '';
+    position: absolute;
+    right: 70px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--primary-light);
+    border-top: 2px solid transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    display: none;
+}
+
+@keyframes spin {
+    0% { transform: translateY(-50%) rotate(0deg); }
+    100% { transform: translateY(-50%) rotate(360deg); }
+}
+
+/* Estilos para búsqueda vacía */
+.no-results {
+    padding: 20px;
+    text-align: center;
+    color: #90a4ae;
+    font-style: italic;
+}
+
+/* 🔥 Búsquedas populares (opcional) */
+.popular-searches {
+    margin-top: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.popular-tag {
+    background: rgba(102, 187, 106, 0.1);
+    color: var(--primary);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(102, 187, 106, 0.3);
+}
+
+.popular-tag:hover {
+    background: var(--primary-light);
+    color: white;
+    transform: translateY(-1px);
+}
+
+/* Responsive mejorado */
+@media (max-width: 768px) {
+    .search-section {
+        padding: 60px 15px;
+    }
+    
+    .search-container {
+        border-radius: 12px;
+        padding: 6px 10px;
+    }
+    
+    .search-input {
+        font-size: 1.05rem;
+        padding: 16px 15px;
+    }
+    
+    .search-btn {
+        width: 48px;
+        height: 48px;
+        font-size: 20px;
+        border-radius: 10px;
+    }
+    
+    .suggestions-list li {
+        padding: 14px 16px;
+        font-size: 0.95rem;
+    }
+    
+    .popular-searches {
+        gap: 0.6rem;
+    }
+    
+    .popular-tag {
+        font-size: 0.85rem;
+        padding: 0.4rem 0.8rem;
+    }
+}
+
+
+
+
+
+
+/* Estilos para el layout de checkout de dos columnas */
+.checkout-layout {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.checkout-form-column {
+    flex: 2;
+}
+
+.checkout-cart-column {
+    flex: 1;
+}
+
+.order-summary-card {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid #dee2e6;
+    position: sticky;
+    top: 2rem;
+}
+
+/* Estilos para la tabla del carrito en el checkout */
+.cart-table-container {
+    overflow-x: auto;
+    margin: 1rem 0;
+}
+
+.cart-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.cart-table th,
+.cart-table td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.cart-table th {
+    background-color: #2d5016;
+    color: white;
+    font-weight: 600;
+}
+
+.cart-table tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+.cart-table tfoot {
+    background-color: #e9ecef;
+    font-weight: bold;
+}
+
+.btn-remove {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.875rem;
+}
+
+.btn-remove:hover {
+    background-color: #c82333;
+}
+
+.cart-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    justify-content: space-between;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .checkout-layout {
+        flex-direction: column;
+    }
+    
+    .checkout-cart-column {
+        order: -1;
+    }
+    
+    .cart-table {
+        font-size: 0.875rem;
+    }
+    
+    .cart-table th,
+    .cart-table td {
+        padding: 0.5rem;
+    }
+}
+/* ... (El resto del código como el texto decorativo y la adaptación móvil se mantiene igual) */
+
+
+
+
+/* Estilos para mensajes flash */
+.flash-message {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 20px;
+    border-radius: 5px;
+    color: white;
+    z-index: 1000;
+    animation: slideInRight 0.3s ease;
+}
+
+.flash-success {
+    background-color: #28a745;
+}
+
+.flash-error {
+    background-color: #dc3545;
+}
+
+.flash-info {
+    background-color: #17a2b8;
+}
+
+/* Estilos para detalles de pago */
+.payment-details {
+    margin: 20px 0;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid #28a745;
+}
+
+.payment-details h3 {
+    margin-top: 0;
+    color: #333;
+}
+
+.form-row {
+    display: flex;
+    gap: 15px;
+}
+
+.form-row .form-group {
+    flex: 1;
+}
+
+.empty-cart {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+    font-style: italic;
+}
+
+.quantity-input {
+    width: 60px;
+    padding: 5px;
+    border: 1px solid #e21a1a;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.btn-remove {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 5px;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
